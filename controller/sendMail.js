@@ -9,7 +9,7 @@ var smtpTransport = nodemailer.createTransport({
     auth: {
       // TODO: replace `user` and `pass` values from <https://forwardemaconst mySecret = process.env['sec']il.net>
       user: "kangcomotbahancheat@gmail.com",
-      pass: "xsmtpsib-53183c864eb351890c9b03795dcd668b3409065cb14f30072f8a49c8025a4f7d-f2X5WDLTKFbB3E08", // replace with your password
+      pass: "xsmtpsib-53183c864eb351890c9b03795dcd668b3409065cb14f30072f8a49c8025a4f7d-KfcrqUTgJI7LvjdR", // replace with your password
     },
   });
 
