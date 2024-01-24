@@ -1,30 +1,30 @@
 //―――――――――――――――――――――――――――――――――――――――――― ┏  Modules ┓ ―――――――――――――――――――――――――――――――――――――――――― \\
 
-require('../settings')
+require("../settings");
 const nodemailer = require("nodemailer");
 
 var smtpTransport = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
-    port: 587,
-    auth: {
-      // TODO: replace `user` and `pass` values from <https://forwardemaconst mySecret = process.env['sec']il.net>
-      user: "kangcomotbahancheat@gmail.com",
-      pass: "xsmtpsib-53183c864eb351890c9b03795dcd668b3409065cb14f30072f8a49c8025a4f7d-KfcrqUTgJI7LvjdR", // replace with your password
-    },
-  });
+  port: 587,
+  auth: {
+    // TODO: replace `user` and `pass` values from <https://forwardemaconst mySecret = process.env['sec']il.net>
+    user: "kangcomotbahancheat@gmail.com",
+    pass: "J3PLAWTXyv1SN5qn", // replace with your password
+  },
+});
 
 //―――――――――――――――――――――――――――――――――――――――――― ┏ Send Reset Email┓ ―――――――――――――――――――――――――――――――――――――――――― \\
 
 module.exports.sendResetEmail = async (email, token) => {
-  return new Promise(async(resolve, rejecet) => {
+  return new Promise(async (resolve, rejecet) => {
+    var url = `http://${domain}/reset-password?token=` + token;
 
-  var url = `http://${domain}/reset-password?token=` + token;
-
-  await smtpTransport.sendMail({
-    from: "support@miniwon.store",
-    to: email,
-    subject: "Your Reset Password Miniwon API",
-    html: `
+    await smtpTransport.sendMail(
+      {
+        from: "support@miniwon.store",
+        to: email,
+        subject: "Your Reset Password Miniwon API",
+        html: `
     <!DOCTYPE html>
     <html>
     <head>
@@ -146,7 +146,7 @@ module.exports.sendResetEmail = async (email, token) => {
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                   <p style="margin: 0;">
-                    Masalah melog masuk?<br>Menetapkan semula kata laluan anda adalah mudah.<br><br>Hanya tekan butang di bawah dan ikut arahan. Kami akan membantu anda beroperasi dalam masa yang singkat.</p>
+                    Request Reser Password?<br>Reset Password<br><br>Tekan Tombol Berikut Ini, Apa Bila Anda Tidak Meminta Reset Password Abaikan Saja Pesan Ini, Pihak Miniwon Tidak Pernah Meminta Password User!</p>
                 </td>
               </tr>
 
@@ -187,7 +187,7 @@ module.exports.sendResetEmail = async (email, token) => {
     
               <tr>
                 <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                  <p style="margin: 0;">Jika anda tidak membuat permintaan ini, sila abaikan e-mel ini..</p>
+                  <p style="margin: 0;">Jika anda tidak membuat permintaan ini, sila abaikan pesan ini..</p>
                 </td>
               </tr>
     
@@ -201,31 +201,32 @@ module.exports.sendResetEmail = async (email, token) => {
     </body>
     </html>
 
-    `
-  }, (error, info) => {
-    if (error) {
-      resolve('error')
-      console.log(`[!] Warning SMTP error ,Limit Habis`);
-    } else{
-      resolve()
-    }
+    `,
+      },
+      (error, info) => {
+        if (error) {
+          resolve("error");
+          console.log(`[!] Warning SMTP error ,Limit Habis`);
+        } else {
+          resolve();
+        }
+      },
+    );
   });
-
-  })
-
-}
+};
 
 //―――――――――――――――――――――――――――――――――――――――――― ┏ Send Verify Email ┓ ―――――――――――――――――――――――――――――――――――――――――― \\
 
 module.exports.sendVerifyEmail = async (email, token) => {
-  return new Promise(async(resolve, rejecet) => {
+  return new Promise(async (resolve, rejecet) => {
     var url = `http://${domain}/verifyemail?token=` + token;
 
-  await smtpTransport.sendMail({
-    from: "support@miniwon.store",
-    to: email,
-    subject: "Verify Your Mail Miniwon API",
-    html: `
+    await smtpTransport.sendMail(
+      {
+        from: "support@miniwon.store",
+        to: email,
+        subject: "Verify Your Mail Miniwon API",
+        html: `
     <!DOCTYPE html>
     <html>
     <head>
@@ -305,7 +306,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
     <body style="background-color: #e9ecef;">
     
       <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-        Sahkan E-mel Anda Dengan klik Buton Di Bawah.
+        Verifikasi E-mail Mu Dengan Cara Tekan Tombol Di Bawah
       </div>
 
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -346,7 +347,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
     
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                  <p style="margin: 0;">Terima kasih kerana guna rest api alpis, Sila tekan button di bawah untuk sahkan akaun anda.</p>
+                  <p style="margin: 0;">Yey Satu langkah lagi untuk daftar di website miniwon, Selamat datang di keluarga miniwon kami senang atas kedatangan anda 🥳</p>
                 </td>
               </tr>
 
@@ -371,7 +372,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
 
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                  <p style="margin: 0;">Aliff,<br> ${domain}</p>
+                  <p style="margin: 0;">Miniwon X Bad Apple,<br> ${domain}</p>
                 </td>
               </tr>
     
@@ -387,7 +388,7 @@ module.exports.sendVerifyEmail = async (email, token) => {
     
               <tr>
                 <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                  <p style="margin: 0;">Anda menerima e-mel ini kerana kami menerima permintaan untuk pengesahan akaun untuk akaun anda. Jika anda tidak meminta pengesahan akaun anda boleh memadamkan e-mel ini dengan selamat.</p>
+                  <p style="margin: 0;">Anda menerima pesan ini karena anda telah mendaftar di miniwon, apa bila anda tidak merasa mendaftar silahkan abaikan pesan ini</p>
                 </td>
               </tr>
     
@@ -402,17 +403,17 @@ module.exports.sendVerifyEmail = async (email, token) => {
     </html>
 
   `,
-}, (error, info) => {
-  if (error) {
-    resolve('error')
-    console.log(`[!] Warning SMTP error ,Limit Habis`);
-  } else{
-    resolve()
-  }
-});
-
-})
-
-}
+      },
+      (error, info) => {
+        if (error) {
+          resolve("error");
+          console.log(`[!] Warning SMTP error ,Limit Habis`);
+        } else {
+          resolve();
+        }
+      },
+    );
+  });
+};
 
 //―――――――――――――――――――――――――――――――――――――――――― ┏  Make by Alip ┓ ―――――――――――――――――――――――――――――――――――――――――― \\
